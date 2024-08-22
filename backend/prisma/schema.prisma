@@ -1,0 +1,59 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(100)
+  email     String   @unique @db.VarChar(255)
+  password  String   @db.VarChar(255)
+  direccion String   @db.VarChar(255)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+}
+
+model Location {
+  id   Int    @id @default(autoincrement())
+  name String @db.VarChar(255)
+  posX Int
+  posY Int
+
+  location1Relation Connection[] @relation("location1Relation")
+  location2Relation Connection[] @relation("location2Relation")
+  initialConnectionRoue Route[] @relation("InitialLocationRelationRoute")
+  locationDetailRoute DetailRoute[] @relation("locationDetailRoute")
+}
+
+model Connection {
+  id              Int      @id @default(autoincrement())
+  location1      Int
+  location2        Int
+  price           Float
+
+  location1Relation Location @relation("location1Relation", fields: [location1], references: [id], onDelete: Cascade, onUpdate: Cascade)   
+  location2Relation   Location @relation("location2Relation", fields: [location2], references: [id], onDelete: Cascade, onUpdate: Cascade)      
+}
+
+model Route {
+  id Int      @id @default(autoincrement())
+  name String @db.VarChar(255)
+  initialLoc Int
+
+  initialLocation Location @relation("InitialLocationRelationRoute", fields: [initialLoc], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  routeDetailRoute DetailRoute[] @relation("routeDetailRoute")
+}
+
+model DetailRoute {
+  id         Int      @id @default(autoincrement())
+  routeId    Int
+  locationId Int
+  orden      Int
+  
+  route      Route    @relation("routeDetailRoute", fields: [routeId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  location   Location @relation("locationDetailRoute", fields: [locationId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
