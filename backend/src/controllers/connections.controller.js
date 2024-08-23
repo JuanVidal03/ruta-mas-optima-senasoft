@@ -85,5 +85,3 @@ export const deleteConnectionById = async(req, res) => {
         });
     }
 }
-
-// https://leafletjs.com/

@@ -6,7 +6,7 @@ CREATE TABLE `User` (
     `password` VARCHAR(255) NOT NULL,
     `direccion` VARCHAR(255) NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `updatedAt` DATETIME(3) NOT NULL,
+    `updatedAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 
     UNIQUE INDEX `User_email_key`(`email`),
     PRIMARY KEY (`id`)
@@ -25,8 +25,8 @@ CREATE TABLE `Location` (
 -- CreateTable
 CREATE TABLE `Connection` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `initialLoc` INTEGER NOT NULL,
-    `finalLoc` INTEGER NOT NULL,
+    `location1` INTEGER NOT NULL,
+    `location2` INTEGER NOT NULL,
     `price` DOUBLE NOT NULL,
 
     PRIMARY KEY (`id`)
@@ -52,10 +52,10 @@ CREATE TABLE `DetailRoute` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- AddForeignKey
-ALTER TABLE `Connection` ADD CONSTRAINT `Connection_initialLoc_fkey` FOREIGN KEY (`initialLoc`) REFERENCES `Location`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `Connection` ADD CONSTRAINT `Connection_location1_fkey` FOREIGN KEY (`location1`) REFERENCES `Location`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `Connection` ADD CONSTRAINT `Connection_finalLoc_fkey` FOREIGN KEY (`finalLoc`) REFERENCES `Location`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `Connection` ADD CONSTRAINT `Connection_location2_fkey` FOREIGN KEY (`location2`) REFERENCES `Location`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `Route` ADD CONSTRAINT `Route_initialLoc_fkey` FOREIGN KEY (`initialLoc`) REFERENCES `Location`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
