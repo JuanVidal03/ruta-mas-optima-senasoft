@@ -20,8 +20,8 @@ model User {
 model Location {
   id   Int    @id @default(autoincrement())
   name String @db.VarChar(255)
-  posX Int
-  posY Int
+  posX Float
+  posY Float
 
   location1Relation Connection[] @relation("location1Relation")
   location2Relation Connection[] @relation("location2Relation")
@@ -31,8 +31,8 @@ model Location {
 
 model Connection {
   id              Int      @id @default(autoincrement())
-  location1      Int
-  location2        Int
+  location1       Int
+  location2       Int
   price           Float
 
   location1Relation Location @relation("location1Relation", fields: [location1], references: [id], onDelete: Cascade, onUpdate: Cascade)   
