@@ -109,7 +109,7 @@ export const veriFyToken = async(req, res) => {
 
             return res.status(200).json({
                 message: "Token verificado exitosamente.",
-                data: user
+                data: userFound
             });
         })
 
