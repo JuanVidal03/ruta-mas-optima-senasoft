@@ -1,0 +1,11 @@
+// coordenadas de Cali
+// 3.4516 latitud
+// 76.5319 longitud
+
+// coordenadas de popayan
+// 2.4448 latitud
+// 76.6147 longitud
+
+// coordenadas piendamo
+// 2.5833 latitud
+// 76.6833 longitud
